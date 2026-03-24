@@ -247,18 +247,28 @@
             document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Popup Logic
-        function openPop(t, p, i) {
-            document.getElementById('pop-t').innerText = t;
-            document.getElementById('pop-p').innerText = 'Rp ' + p;
-            document.getElementById('pop-img').src = i;
-            
-            // Link Dinamis (Ganti dengan link kamu)
-            document.getElementById('wa-link').href = `https://wa.me/628123456789?text=Halo%20IQL,%20saya%20tertarik%20pesan%20${t}`;
-            
-            document.getElementById('pop').classList.remove('hidden');
-        }
-        function closePop() { document.getElementById('pop').classList.add('hidden'); }
+        
+ // Popup Logic - Sekarang mendukung WhatsApp dan Shopee
+function openPop(t, p, i, s) {
+    // 1. Update teks dan gambar seperti biasa
+    document.getElementById('pop-t').innerText = t;
+    document.getElementById('pop-p').innerText = 'Rp ' + p;
+    document.getElementById('pop-img').src = i;
+    
+    // 2. Link WhatsApp (Tetap ada, otomatis isi nama produk)
+    // Ganti nomor 628123456789 dengan nomor WA kamu
+    document.getElementById('wa-link').href = `https://wa.me/628123456789?text=Halo%20IQL,%20saya%20tertarik%20pesan%20${t}`;
+    
+    // 3. Link Shopee Dinamis (Parameter ke-4)
+    // Pastikan di HTML modal kamu, tombol Shopee punya id="shopee-link"
+    const shopeeBtn = document.getElementById('shopee-link');
+    if (shopeeBtn) {
+        shopeeBtn.href = s; 
+    }
+    
+    // Tampilkan popup
+    document.getElementById('pop').classList.remove('hidden');
+}
     function toggleLove(btn) {
     btn.classList.toggle('text-red-500'); // Memberi warna merah saat aktif
     btn.classList.toggle('scale-125');    // Memberi efek sedikit membesar
